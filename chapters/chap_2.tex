@@ -1,0 +1,343 @@
+\chapter{学科基础}
+\section{永磁同步电机结构及数学模型}
+\subsection{永磁同步电机基本结构}
+永磁同步电机（permanent magnet synchronous motor, PMSM）主要由转子、定子和端盖等部分构成。根据转子上永磁体位置分布的不同，PMSM的转子结构可以分为面贴式和内埋式两种，具体结构如图\ref{fig:pmsm_stru}所示。
+%\begin{figure}[htbp]
+%\centering
+%\includegraphics[width=.3\textwidth]{pmsm——stru}
+%\caption{永磁同步电机结构}
+%\label{pmsm_stru}
+%\end{figure}
+
+
+通常来讲，面贴式PMSM转子结构中的永磁磁极易于实现最优设计，能使电机的气隙磁密波形趋于正弦波分布，
+\subsection{坐标变换}
+为了实现磁场定向控制，需要将自然坐标系下的PMSM数学模型变换到静止坐标系下和同步旋转坐标系下，它们之间的坐标关系如图\ref{fig:coordinate}所示。其中，$ABC$为自然坐标系，$\alpha-\beta$为静止坐标系，$d-q$为同步旋转坐标系。
+%\subsection{Clark变换}
+从$ABC$自然坐标系变换到$\alpha-\beta$静止坐标系的坐标变换为Clark变换，其坐标变换公式为
+\begin{equation}
+\centering
+[f_\alpha \quad f_\beta \quad f_0]^T=T_{3s/2s}[f_A \quad f_B \quad f_C]^T
+\end{equation}
+其中，$f$代表电机的电压、电流或磁链等物理量；$T_{3s/2s}$为坐标变换矩阵，可以表示为
+\begin{equation}
+\label{ }
+T_{3s/2s}=\left[
+\begin{array}{ccc}
+  1 & -\frac{1}{2} & -\frac{1}{2}  \\
+  0 & \frac{\sqrt{3}}{2} & -\frac{\sqrt{3}}{2}  \\
+  \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} 
+\end{array}
+\right]
+\end{equation}
+从$\alpha-\beta$静止坐标系变换到$ABC$自然坐标系的坐标变换为反Clark变换，其变换公式为
+\begin{equation}
+\centering
+[f_A \quad f_B \quad f_C]^T=T_{2s/3s}[f_\alpha \quad f_\beta \quad f_0]^T
+\end{equation}
+其中，$T_{2s/3s}$为坐标变换矩阵，可以表示为
+\begin{equation}
+T_{2s/3s}=T_{3s/2s}^{-1}=\left[
+\begin{array}{ccc}
+  1 & 0 & \frac{\sqrt{2}}{2}  \\
+  -\frac{1}{2} & \frac{\sqrt{3}}{2} & \frac{\sqrt{2}}{2}  \\
+  -\frac{1}{2} & -\frac{\sqrt{3}}{2} & \frac{\sqrt{2}}{2}  
+\end{array}
+\right]
+\end{equation}
+%\subsection{Park变换}
+从$\alpha-\beta$静止坐标系变换到$d-q$同步旋转坐标系的坐标变换为Park变换，其坐标变换公式为
+\begin{equation}
+\centering
+[f_d \quad f_q]^T=T_{2s/2r}[f_\alpha \quad f_\beta]^T
+\end{equation}
+其中，$T_{2s/2r}$为坐标变换矩阵，可以表示为
+\begin{equation}
+T_{2s/2r}=\left[
+\begin{array}{ccc}
+   \cos{\theta_e} & \sin{\theta_e}  \\
+  -\sin{\theta_e} & \cos{\theta_e}  \\ 
+\end{array}
+\right]
+\end{equation}
+从$d-q$同步旋转坐标系变换到$\alpha-\beta$静止坐标系的坐标变换为反Park变换，其变换公式为
+\begin{equation}
+\centering
+[f_\alpha \quad f_\beta]^T=T_{2r/2s}[f_d \quad f_q]^T
+\end{equation}
+其中，$T_{2r/2s}$为坐标变换矩阵，可以表示为
+\begin{equation}
+T_{2r/2s}=\left[
+\begin{array}{ccc}
+   \cos{\theta_e} & -\sin{\theta_e}  \\
+   \sin{\theta_e} & \cos{\theta_e}  \\ 
+\end{array}
+\right]
+\end{equation}
+另外，可以直接从$ABC$自然坐标系变换到$d-q$同步旋转坐标系，其变换公式为
+\begin{equation}
+\centering
+[f_d \quad f_q \quad f_0]^T=T_{3s/2r}[f_A \quad f_B \quad f_C]^T
+\end{equation}
+其中，$T_{3s/2r}$为坐标变换矩阵，可以表示为
+\begin{equation}
+T_{3s/2r}=T_{3s/2s}\cdot T_{2s/2r}=\frac{2}{3}\left[
+\begin{array}{ccc}
+  \cos{\theta_e} & \cos{\theta_e-2\pi/3} & \cos{\theta_e+2\pi/3}  \\
+  -\sin{\theta_e} & -\sin{\theta_e-2\pi/3} & -\sin{\theta_e+2\pi/3}  \\
+  \frac{1}{2} & \frac{1}{2} & \frac{1}{2}
+\end{array}
+\right]
+\end{equation}
+反之，也可以直接从$d-q$同步旋转坐标系变换到$ABC$自然坐标系，其变换公式为
+\begin{equation}
+\centering
+[f_A \quad f_B \quad f_C]^T=T_{2r/3s}[f_d \quad f_q \quad f_0]^T
+\end{equation}
+其中，$T_{2r/3s}$为坐标变换矩阵，可以表示为
+\begin{equation}
+T_{2r/3s}=T_{3s/2r}^{-1}=\left[
+\begin{array}{ccc}
+  \cos{\theta_e} & -\sin{\theta_e} & \frac{1}{2}  \\
+  \cos{\theta_e-2\pi/3} & -\sin{\theta_e-2\pi/3} & \frac{1}{2}  \\
+  \cos{\theta_e+2\pi/3} & -\sin{\theta_e+2\pi/3} & \frac{1}{2} 
+\end{array}
+\right]
+\end{equation}
+
+以上便是自然坐标系、静止坐标系和同步旋转坐标系三者之间的变换关系。如果将变换前后幅值不变作为约束条件，则变换矩阵前的系数为$2/3$；如果将变换前后功率不变作为约束条件，则该系数为$\sqrt{2/3}$。若无特殊说明，本文均采用幅值不变作为约束条件。另外，由于PMSM是一个三相对称系统，在计算时零序分量$f_0$可以忽略不计。
+\subsection{永磁同步电机数学模型}
+%\subsection{$\alpha-\beta$静止坐标系下的数学模型}
+为了方便电机转子位置和转速观测器的设计，利用Clark变换，获得电机$\alpha-\beta$静止坐标系下的数学模型。
+\begin{equation}
+\label{ }
+\left[\begin{array}{c}u_\alpha \\u_\beta\end{array}\right]=\left[\begin{array}{cc}R+\frac{\diff}{{\diff}t}L_\alpha & \frac{\diff}{{\diff}t}L_{\alpha\beta} \\ \frac{\diff}{{\diff}t}L_{\alpha\beta} & R+\frac{\diff}{{\diff}t}L_\beta\end{array}\right]\left[\begin{array}{c}i_\alpha \\i_\beta\end{array}\right]+\omega_e\psi_f\left[\begin{array}{c}-\sin{\theta_e} \\ \cos{\theta_e}\end{array}\right]
+\end{equation}
+其中：$[u_\alpha \quad u_\beta]^T$、$[i_\alpha \quad i_\beta]^T$分别为$\alpha-\beta$静止坐标系下的定子电压和定子电流，
+
+%\subsection{$d-q$同步旋转坐标系下的数学模型}
+为了方便电机控制器的设计，利用Park变换，获得电机$d-q$同步旋转坐标系下的数学模型。
+\begin{equation}
+\label{equ:1}
+\Bigg\{\begin{aligned}
+u_d & =Ri_d+\frac{\diff}{{\diff}t}\psi_d-\omega_e\psi_q \\
+u_q & =Ri_q+\frac{\diff}{{\diff}t}\psi_q+\omega_e\psi_d 
+\end{aligned}
+\end{equation}
+定子磁链方程为
+\begin{equation}
+\label{equ:2}
+\Bigg\{\begin{aligned}
+\psi_d & = L_di_d+\psi_f \\
+\psi_q & = L_qi_q 
+\end{aligned}
+\end{equation}
+将式\ref{equ:2}带入式\ref{equ:1}，可得到定子电压方程为
+\begin{equation}
+\label{equ:3}
+\Bigg\{\begin{aligned}
+u_d & = Ri_d+L_d\frac{\diff}{{\diff}t}i_d-\omega_eL_qi_q \\
+u_q & = Ri_q+L_q\frac{\diff}{{\diff}t}i_q+\omega_e(L_di_d+\psi_f) 
+\end{aligned}
+\end{equation}
+其中：$u_d$、$u_q$分别是定子电压的$d-q$轴分量；$i_d$、$i_q$分别是定子电流的$d-q$轴分量；$R$是定子电阻；$\psi_d$、$\psi_q$是定子磁链的$d-q$轴分量；$\omega_e$是电角速度；$L_d$、$L_q$分别是$d-q$轴的电感分量；$\psi_f$代表永磁体磁链。
+
+根据式\ref{equ:3}可以得出如图\ref{fig:1}所示的电压等效电路。从图\ref{fig:1}中可以看出，PMSM的数学模型实现了完全的解耦。
+\begin{figure}[htbp]
+\centering
+
+\caption{default}
+\label{default}
+\end{figure}
+此时电磁转矩方程可以表示为
+\begin{equation}
+T_e=\frac{3}{2}p_ni_q[i_d(L_d-L_q)+\psi_f]
+\end{equation}
+式\ref{}~\ref{}是针对内置式三相PMSM建立的数学模型；对于面贴式三相PMSM，定子电感满足$L_d=L_q=L_s$。
+\section{矢量控制技术}
+矢量控制技术是借鉴了直流电机电枢电流和励磁电流相互垂直、没有耦合以及可以独立控制的思路，以坐标变换理论为基础，通过对电机定子电流在$d-q$同步旋转坐标系中大小和方向的控制，达到对直轴和交轴分量的解耦目的，从而实现磁场和转矩的解耦控制，使交流电机具有类似直流电机的控制性能。矢量控制的出现对电机控制有重大的研究意义，使得电机控制技术迈进了一个新的发展时代。
+
+对于三相PMSM矢量控制技术而言，通常包括转速环控制、电流环控制和PWM控制算法三个主要部分。其中，转速环控制的作用是控制电机的转速，使其能够达到既能调速有能稳速的目的；电流环控制的作用在于加快系统的动态调节过程，使得电机定子电流更好地接近给定的电流矢量；PWM控制目前主要采用SVPWM控制矢量调制技术，其作用是将恒定的直流电压转换为电机所需要的任意电压。
+
+对于面贴式PMSM而言，通常采用$i_d=0$矢量控制方法。图\ref{fig:vc}给出了其框图
+\begin{figure}[htbp]
+\begin{center}
+
+\caption{default}
+\label{fig:vc}
+\end{center}
+\end{figure}
+
+
+\section{自抗扰控制技术}
+自抗扰控制技术式韩京清研究院对经典调节理论与现代控制理论两方面的内在思想不断进行深入思考的过程中，借鉴现代控制理论在系统分析结构性质方面的成果，在经典控制论思想精华的基础上逐步构建，并于1999年正式系统地提出来的。其核心思想是以简单的积分串联型为标准型，把系统动态中不同于标准型的部分（包括系统的不确定性和扰动）视为总扰动（包括内扰和外扰），以扩张状态观测器为手段，实时地对总扰动进行估计并加以消除，从而把充满扰动、不确定性和非线性的被控对象还原为标准的积分串联系统，使得控制系统的设计从复杂到简单，从抽象到直观。
+
+ADRC的基本框架如图\ref{fig:td}所示。
+\begin{figure}[htbp]
+\begin{center}
+\caption{default}
+\label{fig:vc}
+\end{center}
+\end{figure}
+
+
+
+
+自抗扰控制技术是由中国科学院系统科学研究所韩京清研究员提出的一种非线性控制策略，它是在传统的PID技术上发展而来，继承了PID控制器不依赖对象模型的优点，同时也克服了PID控制器的许多缺点，突破了PID的局限性。通常来讲，一个自抗扰控制器由三部分组成，它们分别是：跟踪微分器（Tracking Differentiator, TD），扩展状态观测器（Extended State Observer, ESO）和非线性状态误差反馈（Nonlinear State Error Feedback, NLSEF）。
+\subsection{跟踪微分器}
+在经典控制理论中，对给定信号的微分信号是用如下微分环节来实现的。
+\begin{equation}
+\centering
+\label{equ:1}
+y = w(s)v = \frac{s}{{Ts + 1}}v = \frac{1}{T}(1 - \frac{1}{{Ts + 1}})v
+\end{equation}
+其中，T是比较小的时间常数。这个微分环节可以改写成
+\begin{equation}
+\centering
+\label{equ:2}
+y = w(s)v = \frac{1}{T}(v - \frac{1}{{Ts + 1}}v)
+\end{equation}
+
+这里右边括号内的第二项是时间常数为T的惯性环节，而第一项是把输入信号直接传递到输出信号的过程。其等价的方框图如图\ref{fig:td}所示
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.3\textwidth]{ustc_logo_fig}
+\caption{测试图片}
+\label{fig:td}
+\end{figure}
+如果把第二项惯性环节的输出记作${\bar v}$，那么式\ref{equ:2}将满足等式
+\begin{equation}
+\centering
+\label{equ:2}
+y(t) = \frac{1}{T}(v(t) - \bar v(t))
+\end{equation}
+当输入信号$v(t)$的变化比较缓慢而时间常数$T$比较小的时候，有近似关系$\bar v(t) \approx v(t - T)$成立，因此由式\ref{equ:2}可以得到
+\begin{equation}
+\centering
+\label{equ:3}
+y(t) = \frac{1}{T}(v(t) - \bar v(t)) \approx \frac{1}{T}(v(t) - v(t - T)) \approx \dot v(t)
+\end{equation}
+当然，时间常数$T$越小，输出$y(t)$越接近微分$\dot v(t)$。这就是微分环节\ref{equ:1}的数学含义。
+
+可以说，这里的微分就是用微分近似公式
+\begin{equation}
+\centering
+\label{}
+\dot v(t) = \frac{{v(t) - v(t - T)}}{T}
+\end{equation}
+来实现的。式中的延迟信号$v(t-T)$式通过惯性环节$1/(Ts+1)$来实现。这个惯性环节的时间常数越小，延迟信号$v(t-T)$越接近$v(t)$，从而微分的近似度也就越高。
+
+但是，如果输入信号$v(t)$被随机噪声$n(t)$所污染，那么由式\ref{equ:}和式\ref{equ:}得到
+\begin{equation}
+\centering
+\label{}
+y(t) = \frac{1}{\tau }(v(t) + n(t) - \overline {v(t) + n(t)} )
+\end{equation}
+式中，$\overline {v(t) + n(t)}$是信号$v(t)+n(t)$通过惯性环节$1/(Ts+1)$所得信号，因此满足微分方程
+
+
+即输出信号$y(t)$是输入信号$v(t)$的微分信号叠加上放大了$1/T$倍的噪声信号，从而$T$越小，噪声放大越严重，完全可以淹没微分信号$\dot v(t)$。这就是经典微分环节\ref{equ:1}的噪声放大效应。
+
+为了消除或减弱噪声放大效应，把微分近似公式\ref{equ:1}换成另一种微分近似公式
+\begin{equation}
+\centering
+\label{}
+\dot v(t) = \frac{{v(t - \tau_1) - v(t - \tau_2)}}{{\tau_2 - \tau_1}},0 < \tau_1 < \tau_2
+\end{equation}
+而且延迟信号${v(t - \tau_1)}$和${v(t - \tau_2)}$分别将由惯性环节$1/(\tau_1s + 1)$和$1/(\tau_2s + 1)$来获取，那么可以降低噪声放大效应。式\ref{equ:1}的等价方框图为图\ref{fig:td}。这个微分近似公式的传递函数为
+\begin{equation}
+\centering
+\label{}
+y = \frac{1}{{\tau_2 - \tau_1}}(\frac{1}{{\tau_1s + 1}} - \frac{1}{{\tau_2s + 1}})v = \frac{s}{{\tau_1\tau_2{s^2} + (\tau_1 + \tau_2)s + 1}}v
+\end{equation}
+
+
+等价的状态变量实现为
+\begin{equation}
+\centering
+\label{}
+\left\{ \begin{aligned}
+\dot x_1 &= x_2\\
+\dot x_2 &= - \frac{1}{{\tau_1\tau_2}}(x_1 - v(t)) - \frac{{\tau_1 + \tau_2}}{{\tau_1\tau_2}}\\
+y &= x_2
+\end{aligned} \right.
+\end{equation}
+下面比较传递关系\ref{equ:2}和\ref{equ:2}确定的微分信号。
+
+\subsection{扩张状态观测器}
+扩张状态观测器（ES）是ADRC的核心部分，用于解决主动抗扰技术中扰动观测这一核心问题。借用状态观测器的思想，将影响被控对象输出的扰动作用扩张成心得状态变量，用特殊的反馈机制来建立能够观测被扩张状态即扰动作用的扩张状态观测器。这个扩张状态观测器并不依赖生成扰动的模型，也不需要直接测量就能对扰动进行观测，得到估计值。
+
+若假设系统中含有非线性动态、模型不确定性及外部扰动，则均可用扩张状态观测器进行实时观测并加以补偿，它可以将含有未知外扰的非线性不确定对象用非线性状态反馈化为“积分器串联型”，且对一定范围内对象具有很好的适应性和鲁棒性。将系统化为“积分器串联型”以后，就能对它采用“非线性状态误差反馈”控制算法，设计出理想的控制器。在非线性状态误差反馈控制器中，由于扩张状态观测器能够实时观测未知外扰和系统模型产生的实时作用，采用恰当的方法加以补偿，从而线性设计所需的内模原理和在常值扰动下为消除静差而采用的积分器都不再必要了。
+
+对于二阶对象
+\begin{equation}
+\centering
+\label{}
+\ddot y = f(y,\dot y,w(t),t) + bu
+\end{equation}
+其中，$w(t)$为外扰作用，$f(x,\dot x,w(t),t)$为综合了外扰和内扰的总扰动。其状态空间方程为
+\begin{equation}
+\centering
+\label{}
+\left\{ \begin{aligned}
+\dot x_1 &= x_2\\
+\dot x_2 &= f(x_1,x_2,w(t),t) + bu\\
+y &= x_1
+\end{aligned} \right.
+\end{equation}
+扩张状态观测器的主要思路是将总扰动扩张成为一个新状态变量，然后利用系统的输入、输出重构出包含系统原有状态变量与扰动的所有状态。因此，对于式\ref{equ:2}所示的二姐对象，我们将$(x,\dot x,w(t),t)$的表现量
+\begin{equation}
+\centering
+\label{}
+a(t) = f(y,\dot y,w(t),t)
+\end{equation}
+当作一个新的未知的状态变量$x_3(t)$加入到原系统中，则原系统变为：
+\begin{equation}
+\centering
+\label{}
+\left\{ \begin{aligned}
+\dot x_1 &= x_2\\
+\dot x_2 &= x_3 + bu\\
+\dot x_3 &= f(x_1,x_2,w(t),t) = w_0(t)\\
+y &= x_1
+\end{aligned} \right.
+\end{equation}
+对此系统建立非线性状态观测器：
+\begin{equation}
+\centering
+\label{}
+\left\{ \begin{aligned}
+\varepsilon _1 &= z_1 - y\\
+\dot z_1 &= z_2 - \beta_1\varepsilon_1\\
+\dot z_2 &= z_3 - \beta_2fal(\varepsilon_1,\frac{1}{2},\delta) + bu\\
+\dot z_3 &= -\beta_3fal(\varepsilon_1,\frac{1}{4},\delta)
+\end{aligned} \right.
+\end{equation}
+其中$fal(x,a,\delta)$为非线性函数：
+\begin{equation}
+\centering
+\label{}
+fal(x,a,\delta ) = \left\{ \begin{aligned}{l}
+&\frac{x}{{\mathop \delta \nolimits^{1 - \alpha } }},&|x| \le \delta \\
+&sign(x)\mathop {|x|}\nolimits^\alpha,&|x| > \delta 
+\end{aligned} \right.
+\end{equation}
+这样，在$b$已知或者接近的情况下，就能使扩张状态观测器的状态变量$z_i$跟踪系统的状态变量$x_i$，且有较大的适应范围。
+
+对应的离散形式ESO可以表示为
+\begin{equation}
+\centering
+\label{}
+\left\{ \begin{aligned}
+\varepsilon _1 &= z_1(k) - y(k)\\
+\dot z_1(k+1) &= z_1(k) - h[z_2(k)-\beta_1\varepsilon_1]\\
+\dot z_2(k+1) &= z_2(k) - h[z_3(k)-\beta_2fal(\varepsilon_1,\frac{1}{2},\delta) + bu]\\
+\dot z_3(k+1) &= z_3(k)-h\beta_3fal(\varepsilon_1,\frac{1}{4},\delta)
+\end{aligned} \right.
+\end{equation}
+\subsection{非线性状态误差反馈}
+基于跟踪微分器方法，可以产生过渡过程的误差信号和误差微分信号，并生成误差积分信号，将误差、误差微分、误差积分三种信号形式组合起来，形成组合控制律。既可以组合成类似PID控制的线性组合，也可以组合成非线性控制组合，如利用fal或者最速控制综合函数fan构造非线性控制器。函数fal或者fan实际上式“小误差大增益，大误差小增益”工程实践经验的数学模拟，并且具有快速收敛的特性，因此这种非线性组合不仅易于数字实现，并且具有良好的鲁棒性和适应性，甚至部分包含了智能的成分。
+
+通常，为了简化ADRC的控制器设计，可以使用经典的PID来
+
+\subsection{自抗扰控制技术的局限性}

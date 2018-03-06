@@ -1,0 +1,58 @@
+\contentsline {chapter}{\numberline {第1章\hspace {.3em}}简介}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}一级节标题}{1}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}二级节标题}{1}{subsection.1.1.1}
+\contentsline {subsubsection}{\numberline {1}三级节标题}{1}{subsubsection.1.1.1.1}
+\contentsline {paragraph}{\numberline {(1)}四级节标题}{1}{paragraph.1.1.1.1.1}
+\contentsline {subparagraph}{\numberline {{\Pifont {pzd}\char 192}}五级节标题}{1}{subparagraph.1.1.1.1.1.1}
+\contentsline {section}{\numberline {1.2}脚注}{1}{section.1.2}
+\contentsline {chapter}{\numberline {第2章\hspace {.3em}}绪论}{2}{chapter.2}
+\contentsline {section}{\numberline {2.1}课题的研究背景及意义}{2}{section.2.1}
+\contentsline {section}{\numberline {2.2}国内外研究现状}{2}{section.2.2}
+\contentsline {section}{\numberline {2.3}本文组织结构}{2}{section.2.3}
+\contentsline {chapter}{\numberline {第3章\hspace {.3em}}学科基础}{3}{chapter.3}
+\contentsline {section}{\numberline {3.1}永磁同步电机结构及数学模型}{3}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}永磁同步电机基本结构}{3}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}坐标变换}{3}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}永磁同步电机数学模型}{5}{subsection.3.1.3}
+\contentsline {section}{\numberline {3.2}矢量控制技术}{6}{section.3.2}
+\contentsline {section}{\numberline {3.3}自抗扰控制技术}{7}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}跟踪微分器}{7}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}扩张状态观测器}{9}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}非线性状态误差反馈}{11}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}自抗扰控制技术的局限性}{11}{subsection.3.3.4}
+\contentsline {chapter}{\numberline {第4章\hspace {.3em}}自抗扰控制技术分析}{12}{chapter.4}
+\contentsline {section}{\numberline {4.1}自抗扰控制技术}{12}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}跟踪微分器}{12}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}扩张状态观测器}{12}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}非线性状态误差反馈}{12}{subsection.4.1.3}
+\contentsline {section}{\numberline {4.2}自抗扰控制技术的问题}{12}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}}{12}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}}{12}{subsection.4.2.2}
+\contentsline {chapter}{\numberline {第5章\hspace {.3em}}转子位置和转速估计}{13}{chapter.5}
+\contentsline {section}{\numberline {5.1}}{13}{section.5.1}
+\contentsline {chapter}{\numberline {第6章\hspace {.3em}}基于自抗扰技术的矢量控制方案}{14}{chapter.6}
+\contentsline {section}{\numberline {6.1}速度环控制}{14}{section.6.1}
+\contentsline {section}{\numberline {6.2}电流环控制}{14}{section.6.2}
+\contentsline {chapter}{\numberline {第7章\hspace {.3em}}基于DSP的电机控制系统实现}{15}{chapter.7}
+\contentsline {section}{\numberline {7.1}DSP程序框架结构}{15}{section.7.1}
+\contentsline {section}{\numberline {7.2}系统实现与结果分析}{15}{section.7.2}
+\contentsline {chapter}{\numberline {第8章\hspace {.3em}}数学}{16}{chapter.8}
+\contentsline {section}{\numberline {8.1}数学符号}{16}{section.8.1}
+\contentsline {section}{\numberline {8.2}定理、引理和证明}{16}{section.8.2}
+\contentsline {section}{\numberline {8.3}自定义}{18}{section.8.3}
+\contentsline {chapter}{\numberline {第9章\hspace {.3em}}浮动体}{19}{chapter.9}
+\contentsline {section}{\numberline {9.1}三线表}{19}{section.9.1}
+\contentsline {section}{\numberline {9.2}长表格}{19}{section.9.2}
+\contentsline {section}{\numberline {9.3}插图}{20}{section.9.3}
+\contentsline {section}{\numberline {9.4}算法环境}{21}{section.9.4}
+\contentsline {chapter}{\numberline {第10章\hspace {.3em}}引用文献标注方法}{22}{chapter.10}
+\contentsline {section}{\numberline {10.1}顺序编码制}{22}{section.10.1}
+\contentsline {subsection}{\numberline {10.1.1}角标数字标注法}{22}{subsection.10.1.1}
+\contentsline {subsection}{\numberline {10.1.2}数字标注法}{23}{subsection.10.1.2}
+\contentsline {section}{\numberline {10.2}著者-出版年制标注法}{23}{section.10.2}
+\contentsline {section}{\numberline {10.3}其他形式的标注}{24}{section.10.3}
+\contentsline {chapter}{参考文献}{25}{chapter*.11}
+\contentsline {chapter}{\numberline {附录 A\hspace {.3em}}论文规范}{26}{appendix.A}
+\contentsline {chapter}{致谢}{27}{appendix*.12}
+\contentsline {chapter}{在读期间发表的学术论文与取得的研究成果}{28}{appendix*.13}
+\contentsfinish 
